@@ -96,10 +96,9 @@
       .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   
-    .mode-toggle { position: fixed; right: 18px; bottom: 16px; z-index: 30; border: 1px solid #ff996e; border-radius: 24px; padding: 11px 18px; background: #17233a; color: white; font: bold 15px Arial,sans-serif; cursor: pointer; box-shadow: 0 0 15px #ff590055; }
+    .mode-toggle { position: absolute; right: 18px; bottom: 16px; z-index: 30; border: 1px solid #ff996e; border-radius: 24px; padding: 11px 18px; background: #17233a; color: white; font: bold 15px Arial,sans-serif; cursor: pointer; box-shadow: 0 0 15px #ff590055; }
     .mode-toggle[aria-pressed="true"] { background: #ff5900; color: #101010; }
     .mode-toggle:focus-visible, .qr-close:focus-visible { outline: 3px solid white; outline-offset: 4px; }
-    .qr-hint { position: absolute; left: 24px; bottom: 12px; margin: 0; color: #d6f9ff; font-size: 14px; }
     .qr-modal { width: 95vw; height: 95dvh; max-width: none; max-height: none; padding: 18px; border: 2px solid #27c6c1; border-radius: 20px; background: #101b32; color: white; overflow: hidden; }
     .qr-modal::backdrop { background: #000b; }
     .qr-modal[open] { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
@@ -107,8 +106,8 @@
     .qr-modal .qr-large { display: block; width: min(74dvh,76vw,700px); height: min(74dvh,76vw,700px); aspect-ratio: 1; object-fit: contain; background: white; border-radius: 8px; flex-shrink: 1; min-height: 0; }
     .qr-modal p { margin: 0; font-size: 15px; text-align: center; }
     .qr-close { position: absolute; top: 10px; right: 12px; width: 42px; height: 42px; border: 1px solid #ffffff88; border-radius: 50%; background: #25324d; color: white; font-size: 28px; cursor: pointer; }
-    body.qr-mode .cards a .image-wrap::after { content: "Toon QR-code"; position: absolute; right: 9px; bottom: 9px; padding: 5px 8px; border-radius: 6px; background: #101b32ee; color: white; font-size: 12px; font-weight: bold; }
-    @media (max-width: 700px) { .qr-hint { position: static; margin-top: 18px; margin-bottom: 45px; } }
+    body.qr-mode .cards a .image-wrap::after { content: none; position: absolute; right: 9px; bottom: 9px; padding: 5px 8px; border-radius: 6px; background: #101b32ee; color: white; font-size: 12px; font-weight: bold; }
+    
 </style>
 </head>
 <body>
@@ -124,16 +123,15 @@
 <article class="card" style="--colour:#ff5900"><a href="https://ocidmisupport-cyber.github.io/games/"><span class="image-wrap"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMzYwIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImciPjxzdG9wIHN0b3AtY29sb3I9IiNmZjU5MDAiIHN0b3Atb3BhY2l0eT0iLjMyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTAxYjMyIi8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjY0MCIgaGVpZ2h0PSIzNjAiIGZpbGw9IiMxMDFiMzIiLz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjM2MCIgZmlsbD0idXJsKCNnKSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmNTkwMCIgc3Ryb2tlLXdpZHRoPSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMjM1IDE0MGgxNzBxMzAgMCA0NSA0NWwyNSA3MHE5IDQwLTI1IDQwLTE1IDAtNDAtMzVIMjMwcS0yNSAzNS00MCAzNS0zNCAwLTI1LTQwbDI1LTcwcTE1LTQ1IDQ1LTQ1WiIvPjxwYXRoIGQ9Ik0yMzUgMTgwdjYwbS0zMC0zMGg2MCIvPjxjaXJjbGUgY3g9IjM5MCIgY3k9IjE5NSIgcj0iOCIvPjxjaXJjbGUgY3g9IjQyMCIgY3k9IjIyNSIgcj0iOCIvPjxwYXRoIGQ9Ik0zMjAgMTQwdi0yNXEwLTI1IDMwLTI1Ii8+PC9nPjwvc3ZnPg==" alt=""></span><span class="name">Ter AArcade</span></a></article>
 <article class="card" style="--colour:#fade29"><div class="coming" aria-label="PowerPoint, volgt binnenkort"><span class="image-wrap"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMzYwIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImciPjxzdG9wIHN0b3AtY29sb3I9IiNmYWRlMjkiIHN0b3Atb3BhY2l0eT0iLjMyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTAxYjMyIi8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjY0MCIgaGVpZ2h0PSIzNjAiIGZpbGw9IiMxMDFiMzIiLz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjM2MCIgZmlsbD0idXJsKCNnKSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZhZGUyOSIgc3Ryb2tlLXdpZHRoPSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIyMDUiIHk9IjgwIiB3aWR0aD0iMjMwIiBoZWlnaHQ9IjE3NSIgcng9IjEyIi8+PHBhdGggZD0iTTMyMCAyNTV2NDVtLTUwIDBoMTAwTTI0MCAyMDV2LTQwbTQwIDQwdi03NW00MCA3NXYtMTA1Ii8+PHBhdGggZD0ibTM2MCAxNDUgNDAgMjUtNDAgMjVaIi8+PC9nPjwvc3ZnPg==" alt=""></span><span class="name">PowerPoint</span><span class="soon">Volgt binnenkort</span></div></article>
 </section>
-  <p class="qr-hint" id="qrHint" hidden>Kies een activiteit om de QR-code groot te tonen.</p>
-</main>
+<button type="button" class="mode-toggle" id="qrToggle" aria-pressed="false">QR-variant</button>
+  </main>
   
 
-<button type="button" class="mode-toggle" id="qrToggle" aria-pressed="false">QR-variant</button>
+
 <dialog class="qr-modal" id="qrModal" aria-labelledby="qrTitle">
   <button type="button" class="qr-close" id="qrClose" aria-label="Sluit QR-code">×</button>
   <h2 id="qrTitle"></h2>
   <img class="qr-large" id="qrImage" alt="">
-  <p>Scan met de camera van je telefoon</p>
 </dialog>
 <script>
 (() => {
@@ -148,7 +146,6 @@
    toggle.setAttribute('aria-pressed', String(qrMode));
    toggle.textContent = qrMode ? 'Terug naar links' : 'QR-variant';
    document.body.classList.toggle('qr-mode', qrMode);
-   document.getElementById('qrHint').hidden = !qrMode;
  });
  document.querySelectorAll('.cards a').forEach(link => {
    link.addEventListener('click', event => {
