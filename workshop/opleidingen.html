@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ICT-opleidingen | Ter AA</title>
+<style>
+:root{--orange:#ef7d00;--orange2:#ffb000;--ink:#132238;--blue:#164f86;--green:#18a66a;--red:#dd3b4a;--paper:#fff;--muted:#e9eef5}
+[hidden]{display:none!important}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#0c1728;color:#fff}body{background:radial-gradient(circle at 15% 8%,#29496c 0,transparent 33%),linear-gradient(145deg,#08111f,#172d48)}
+button,a,input{font:inherit}.shell{width:min(100%,760px);min-height:100vh;margin:auto;padding:16px;display:flex;flex-direction:column}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.logo{display:inline-flex;align-items:center;gap:4px;background:#fff;color:#17253a;padding:8px 12px;border-radius:12px;font-weight:900;font-size:1.25rem;text-decoration:none;letter-spacing:-1px}.logo b{color:var(--orange);font-size:1.45rem}.step{font-weight:800;color:#cbd8e8}.card{background:rgba(255,255,255,.97);color:var(--ink);border-radius:24px;padding:22px;box-shadow:0 18px 55px #0007;flex:1;display:flex;flex-direction:column}.eyebrow{font-size:.82rem;font-weight:900;letter-spacing:.12em;color:var(--orange);text-transform:uppercase}h1{font-size:clamp(1.8rem,8vw,3.1rem);line-height:.98;margin:8px 0 10px}h2{margin:0 0 6px;font-size:1.35rem}.intro{font-size:1.08rem;line-height:1.45;margin:0 0 18px}.mission{display:grid;gap:10px;margin:8px 0 18px}.tile{display:grid;grid-template-columns:48px 1fr 24px;align-items:center;gap:10px;padding:13px;border:2px solid var(--muted);border-radius:16px;color:var(--ink);text-decoration:none;background:#fff}.tile .ico{font-size:1.7rem}.tile strong{display:block}.tile small{color:#607086}.primary,.choice,.smallbtn{border:0;border-radius:14px;cursor:pointer;font-weight:900}.primary{display:block;width:100%;padding:15px;background:linear-gradient(100deg,var(--orange),var(--orange2));color:#1f1b12;text-align:center;text-decoration:none;margin-top:auto;box-shadow:0 8px 20px #ef7d0040}.primary:active,.choice:active{transform:scale(.98)}.question{font-size:1.2rem;font-weight:900;margin:8px 0 14px}.choices{display:grid;gap:10px}.choice{padding:14px 15px;text-align:left;background:#edf2f8;color:var(--ink);border:2px solid transparent}.choice:hover{border-color:#90afd0}.choice.good{background:#dcf8eb;border-color:var(--green)}.choice.bad{background:#ffe5e8;border-color:var(--red)}.feedback{min-height:45px;margin:12px 0;font-weight:800;line-height:1.35}.progress{height:10px;background:#dfe7f0;border-radius:999px;overflow:hidden;margin:0 0 15px}.progress span{display:block;height:100%;background:linear-gradient(90deg,var(--orange),var(--orange2));transition:.25s}.codebox{background:#10233b;color:#fff;border-radius:17px;padding:16px;text-align:center;margin:12px 0}.digit{font-size:3rem;font-weight:1000;color:#ffc247;letter-spacing:.12em}.note{font-size:.9rem;color:#657387}.order{display:grid;gap:9px}.order button{padding:13px;background:#edf2f8;border:2px solid #cbd7e4;border-radius:14px;text-align:left;font-weight:850;color:var(--ink)}.order button.selected{border-color:var(--orange);background:#fff1dd}.fake{background:#edf2f8;border-radius:17px;padding:14px;margin:8px 0}.fake .from{font-weight:900}.fake .url{display:block;color:#b12232;background:#fff;padding:8px;border-radius:9px;margin-top:9px;overflow-wrap:anywhere}.clue{display:block;width:100%;border:2px solid #d8e2ee;border-radius:12px;background:#fff;padding:11px;text-align:left;margin:8px 0;color:var(--ink)}.clue.hit{border-color:var(--green);background:#e7f9f0}.maze{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;max-width:280px;margin:10px auto}.cell{aspect-ratio:1;border-radius:9px;background:#dae4ee;display:grid;place-items:center;font-size:1.5rem}.cell.wall{background:#20364f}.cell.goal{background:#ffd96c}.cell.robot{background:#a8dfc5}.cmds{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.smallbtn{padding:11px 14px;background:#e8eef5;color:var(--ink)}.program{min-height:45px;background:#10233b;color:#fff;border-radius:12px;padding:11px;margin:12px 0;font-weight:800}.code-entry{display:flex;gap:8px;justify-content:center;margin:16px 0}.code-entry input{width:56px;height:62px;border:3px solid #cad6e5;border-radius:13px;text-align:center;font-size:2rem;font-weight:900}.success{text-align:center}.success .trophy{font-size:5rem}.footer{font-size:.78rem;text-align:center;color:#aab9cb;padding:11px 0 0}@media(max-width:420px){.shell{padding:10px}.card{padding:17px;border-radius:20px}.choice{padding:12px}.code-entry input{width:50px}}
+
+textarea{display:block;width:100%;font:inherit;padding:12px;border:2px solid #9eb3cb;border-radius:12px;margin-top:8px}button:disabled{cursor:default;opacity:.8}#story{line-height:1.5}#question{margin:12px 0}#number{color:#586980;font-weight:bold}
+
+#question{white-space:pre-line}#result{margin-top:16px}
+
+/* Mobile chapter themes */
+:root{--accent:#ff9c38;--accent-end:#ffd080;--accent-deep:#973e00;--glow:#ef7d0055;--tint:#fff1df;--orange:var(--accent);--orange2:var(--accent-end)}
+body[data-theme="network"]{--accent:#38c6ff;--accent-end:#a1e9ff;--accent-deep:#005d83;--glow:#008fd655;--tint:#e7f7ff}
+body[data-theme="cyber"]{--accent:#bd93ff;--accent-end:#e5cbff;--accent-deep:#633798;--glow:#924cff55;--tint:#f2eaff}
+body[data-theme="code"]{--accent:#48e6ac;--accent-end:#b0ffd7;--accent-deep:#006347;--glow:#12b67e55;--tint:#e3fcf0}
+html{font-size:18px}body{background:radial-gradient(ellipse at 95% 0,var(--glow),transparent 65%),linear-gradient(155deg,#070d17 12%,#172334 55%,#090f1b);background-attachment:fixed;line-height:1.5}
+.shell{width:min(100%,800px);padding:20px 18px 32px;min-height:100svh;gap:0}.top{gap:12px;margin-bottom:18px;flex-wrap:wrap}.logo{font-size:1.25rem;border-radius:10px;box-shadow:0 5px 22px #0005}.logo b{color:#b95300}.step{font-size:.83rem;letter-spacing:.04em;border:1px solid var(--accent);color:var(--accent-end);padding:7px 10px;border-radius:100px}
+.card{flex:0 1 auto;position:relative;padding:24px;border:1px solid #ffffff80;background:rgba(248,251,255,.96);border-radius:24px;box-shadow:0 26px 70px #0007,0 0 35px var(--glow);overflow-wrap:anywhere}
+.chapter-head{background:linear-gradient(115deg,var(--accent),var(--accent-end));color:#101c2c;padding:22px 24px;margin:-24px -24px 18px;border-radius:23px 23px 0 0;border-bottom:4px solid var(--accent-deep)}
+.chapter-head h1{font-size:clamp(1.8rem,6.5vw,2.5rem);line-height:1.12;margin:8px 0 0;letter-spacing:-.03em}.chapter-kicker{font-size:.8rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px}.chapter-kicker span{font-size:1.6rem;line-height:1}
+h1{font-size:clamp(2rem,7vw,3rem);line-height:1.1;letter-spacing:-.035em}h2,#question{font-size:1.22rem;line-height:1.45;margin:20px 0 16px;font-weight:800}.intro{font-size:1.08rem;line-height:1.6}.note{font-size:.9rem;line-height:1.5;color:#45546a;margin:0 0 18px}.eyebrow{color:var(--accent-deep);font-size:.84rem}
+#number{font-size:.87rem;letter-spacing:.045em;text-transform:uppercase;color:var(--accent-deep);margin:4px 0 12px}.progress{height:12px;margin:0 0 14px;background:#d7dfeb}.progress span{background:linear-gradient(90deg,var(--accent-deep),var(--accent))}
+#story{font-size:1.08rem;line-height:1.65;background:var(--tint);border:1px solid #c7d4df;border-left:5px solid var(--accent-deep);padding:18px;border-radius:4px 16px 16px 4px;margin:0 0 6px}
+.choices{gap:12px;counter-reset:answers}.choice{position:relative;counter-increment:answers;display:flex;align-items:center;gap:12px;min-height:64px;padding:16px;background:#fff;border:2px solid #c7d3e1;border-radius:15px;font-size:1.05rem;line-height:1.45;font-weight:700;box-shadow:0 4px 0 #d9e1ea;text-align:left}.choice:before{content:counter(answers,upper-alpha);flex:0 0 30px;text-align:center;font-size:.85rem;line-height:30px;background:var(--tint);border-radius:8px;color:var(--accent-deep);font-weight:900}.choice:hover:not(:disabled){border-color:var(--accent-deep);background:var(--tint)}.choice.good{background:#e4f9ec;border-color:#137643}.choice.bad{background:#fff0ed;border-color:#be392b}button:disabled{opacity:1}.choice:disabled{box-shadow:none}
+.primary{margin-top:12px;padding:18px 16px;min-height:60px;font-size:1.08rem;line-height:1.4;border-radius:15px;background:linear-gradient(110deg,var(--accent),var(--accent-end));color:#101c2c;box-shadow:0 5px 0 var(--accent-deep),0 12px 25px var(--glow);font-weight:900;touch-action:manipulation}
+.feedback{font-size:1rem;line-height:1.6;min-height:0;margin:18px 0}.feedback:not(:empty){padding:16px;background:#fff;border:2px solid var(--accent-deep);border-radius:14px}.feedback:empty{display:none}textarea{font-size:1.05rem;line-height:1.55;min-height:150px;background:#fff;padding:16px}#worklabel{font-weight:800;margin-top:10px}#result{margin:0}.codebox{background:linear-gradient(140deg,#101c2d,#22374c);border:2px solid var(--accent);margin:18px 0;padding:22px}.digit{color:var(--accent-end);font-size:3.8rem}
+.mission{gap:14px}.tile{border:1px solid #c6d1df;border-left:7px solid var(--tile);padding:17px 14px;grid-template-columns:40px minmax(0,1fr) 16px;background:#fff;box-shadow:0 6px 0 #dce3ec}.tile[data-task="1"]{--tile:#e97c12}.tile[data-task="2"]{--tile:#0095c8}.tile[data-task="3"]{--tile:#9557d6}.tile[data-task="4"]{--tile:#009b6b}.tile .ico{font-size:1.7rem}.tile strong{font-size:1.1rem;line-height:1.35}.tile small{display:block;font-size:.85rem;color:#46586a;margin-top:5px}.footer{font-size:.8rem;margin-top:10px}
+.maze{width:100%;max-width:320px;gap:7px}.cell{font-size:1.8rem}.cmds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.smallbtn{min-height:56px;padding:12px;font-size:1rem;border:2px solid #b8c9d8}.program{font-size:1rem;overflow-wrap:anywhere}.code-entry{gap:8px}.code-entry input{min-width:0;width:clamp(44px,14vw,66px);height:72px;font-size:2rem;border-color:var(--accent-deep)}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #0057bd;outline-offset:4px}
+@media(max-width:480px){html{font-size:19px}.shell{padding:12px 10px 26px}.card{padding:18px;border-radius:20px}.chapter-head{margin:-18px -18px 16px;padding:20px 18px;border-radius:19px 19px 0 0}.top{margin-bottom:14px}.step{font-size:.74rem;padding:6px 8px}.logo{padding:6px 10px}.choice{padding:14px 12px;gap:10px}#story{padding:15px}.note{font-size:.85rem}.tile{gap:8px;padding:16px 10px;grid-template-columns:34px minmax(0,1fr) 12px}.tile strong{font-size:1.02rem}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* Vivid chapter atmosphere */
+:root{--neon:#ff943f;--flare:#ff397c;--ice:#ffe19a;--halo:#ff693e60;--wash:#9c234542}
+body[data-theme="network"]{--neon:#36e2ff;--flare:#5366ff;--ice:#a6f8ff;--halo:#00caff55;--wash:#5244e64d}
+body[data-theme="cyber"]{--neon:#c195ff;--flare:#ff4fac;--ice:#f4c9ff;--halo:#be50ff60;--wash:#ef329344}
+body[data-theme="code"]{--neon:#45f3b0;--flare:#00b7ec;--ice:#c3ffe8;--halo:#14efa655;--wash:#00b0d642}
+body{color:#f5f7ff;background:radial-gradient(ellipse at 0% 12%,var(--halo),transparent 49%),radial-gradient(ellipse at 100% 64%,var(--wash),transparent 55%),linear-gradient(145deg,#090c1d,#101729 45%,#090a17);background-attachment:fixed}
+.shell{position:relative;padding-top:22px}.top{padding:0 3px}.logo{background:#ffffffec;border:1px solid #fff;box-shadow:0 0 25px var(--halo)}.step{background:linear-gradient(125deg,#ffffff15,#ffffff05);border-color:#ffffff45;color:var(--ice);box-shadow:0 0 20px var(--wash);backdrop-filter:blur(12px)}
+.card{color:#f5f7ff;border:1px solid transparent;background:linear-gradient(140deg,#182139f5,#11182bf5 50%,#111425f5) padding-box,linear-gradient(130deg,var(--neon),#ffffff25 42%,var(--flare)) border-box;box-shadow:0 28px 75px #0008,0 0 50px var(--wash);border-radius:25px;padding:24px;backdrop-filter:blur(18px)}
+.chapter-head{isolation:isolate;position:relative;overflow:hidden;background:radial-gradient(ellipse at 92% 5%,#ffffff8c,transparent 44%),linear-gradient(118deg,var(--neon),var(--flare));color:#080f20;border:0;border-bottom:1px solid #ffffff70;border-radius:24px 24px 0 0;padding:26px 24px;margin:-24px -24px 22px;box-shadow:0 12px 38px var(--wash)}
+.chapter-head:after{content:'';position:absolute;z-index:-1;inset:0;background:repeating-linear-gradient(125deg,transparent 0 55px,#ffffff15 56px 57px,transparent 58px 110px);pointer-events:none}.chapter-head h1{font-weight:900;text-shadow:0 1px 0 #ffffff30}.chapter-kicker{letter-spacing:.1em;color:#0a1225}.chapter-kicker span{padding:8px;border-radius:12px;background:#ffffff55;box-shadow:inset 0 1px 0 #fff9}
+h1{color:#fff} .chapter-head h1{color:#080f20}.intro{color:#f1f3ff}.note,.footer{color:#bbc8e3}.eyebrow,#number{color:var(--ice)}
+.progress{background:#060d2080;border:1px solid #ffffff18;height:13px;box-shadow:inset 0 2px 5px #0007}.progress span{background:linear-gradient(90deg,var(--flare),var(--neon),var(--ice));box-shadow:0 0 16px var(--neon)}
+#story{background:linear-gradient(115deg,var(--wash),#ffffff08);border:1px solid #ffffff25;border-left:4px solid var(--neon);color:#f5f7ff;box-shadow:inset 0 1px 0 #ffffff12,0 10px 28px #0002;border-radius:6px 18px 18px 6px}#question{color:#fff}
+.choice{color:#f1f6ff;background:linear-gradient(125deg,#293652,#1b2540);border:1px solid #7a91b36b;box-shadow:0 6px 14px #0003,inset 0 1px 0 #ffffff13;transition:transform .15s,border-color .15s,box-shadow .15s}.choice:before{color:#101728;background:linear-gradient(135deg,var(--ice),var(--neon));box-shadow:0 0 15px var(--wash)}.choice:hover:not(:disabled){color:#fff;background:linear-gradient(115deg,var(--wash),#27334a);border-color:var(--neon);box-shadow:0 0 22px var(--wash);transform:translateY(-2px)}.choice.good{background:linear-gradient(115deg,#154c38,#143a32);border:2px solid #65f3b0;color:#edfff5}.choice.bad{background:linear-gradient(115deg,#64283b,#432237);border:2px solid #ff9baf;color:#fff3f5}
+.primary{position:relative;color:#08101c;background:linear-gradient(110deg,var(--neon),var(--ice) 60%,var(--neon));border:1px solid #ffffff75;box-shadow:0 5px 0 #0005,0 9px 28px var(--halo),inset 0 1px 0 #fff9;font-weight:900;transition:filter .18s,transform .18s}.primary:hover{filter:brightness(1.08)}.primary:active{transform:translateY(2px)}
+.feedback:not(:empty){color:#fff;background:linear-gradient(120deg,var(--wash),#24314a);border:1px solid var(--neon);box-shadow:0 0 24px var(--wash)}textarea{color:#f5f7ff;background:linear-gradient(135deg,#0b1224,#172339);border-color:#889abc}textarea::placeholder{color:#b8c5db}#worklabel{color:var(--ice)}
+.tile{--tile-neon:#ff944a;--tile-flare:#ff397c;color:#fff;border:1px solid #ffffff40;border-left:5px solid var(--tile-neon);background:radial-gradient(ellipse at 110% 0,var(--tile-flare),transparent 65%),linear-gradient(115deg,#1c2942,#27304b);box-shadow:0 9px 22px #0004,inset 0 1px 0 #ffffff20;min-height:100px;transition:transform .18s}.tile[data-task="2"]{--tile-neon:#36e2ff;--tile-flare:#3d56b7}.tile[data-task="3"]{--tile-neon:#cd9cff;--tile-flare:#a22b85}.tile[data-task="4"]{--tile-neon:#53f1b4;--tile-flare:#006f83}.tile:hover{transform:translateY(-2px)}.tile strong{color:#fff;text-shadow:0 1px 4px #000}.tile small{color:#f0f4ff;text-shadow:0 1px 4px #000}.tile .ico{background:#ffffff17;border-radius:12px;padding:5px;display:grid;place-items:center}.tile.done strong:after{content:' ✓';color:var(--tile-neon)}
+.codebox{background:radial-gradient(ellipse at 50% 110%,var(--wash),transparent 80%),linear-gradient(130deg,#0b1225,#1b2540);border-color:var(--neon);box-shadow:0 0 30px var(--wash)}.digit{color:var(--ice);text-shadow:0 0 26px var(--halo)}.code-entry input{background:#111a2e;color:var(--ice);border-color:var(--neon);box-shadow:0 0 15px var(--wash)}.smallbtn{background:linear-gradient(125deg,#2e3d59,#202a43);color:#f4f7ff;border-color:#879ab9}.program{background:#071024;color:var(--ice);border:1px solid #ffffff35}.cell{background:#324963;border:1px solid #718bad}.cell.wall{background:linear-gradient(135deg,#10182c,#080f1c);border-color:#21304c}.cell.goal{background:linear-gradient(135deg,#ffde80,#ffa744);box-shadow:0 0 18px #ffb23e55}.cell.robot{background:linear-gradient(135deg,#a2ffd5,#41dcb2);box-shadow:0 0 18px #41dcb255}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--ice);outline-offset:4px}
+@media(max-width:480px){.shell{padding:14px 10px 28px}.card{padding:18px;border-radius:22px}.chapter-head{padding:22px 18px;margin:-18px -18px 20px;border-radius:21px 21px 0 0}.tile{grid-template-columns:38px minmax(0,1fr) 12px}.chapter-head h1{font-size:1.85rem}}
+
+.logo{display:inline-flex;background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;flex-shrink:0}.logo img{display:block;width:150px;height:auto;max-width:40vw;object-fit:contain}@media(max-width:480px){.logo{padding:0}.logo img{width:125px}}
+
+/* Portrait-first layout: one readable phone-width column at every screen size. */
+html{font-size:20px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.shell{width:100%;max-width:480px;min-height:100svh;padding:12px 12px max(24px,env(safe-area-inset-bottom));margin-inline:auto}
+.top{margin-bottom:12px;gap:8px;flex-wrap:wrap;align-items:center}.logo img{width:120px;max-width:35vw}.step{font-size:.72rem;padding:6px 9px;letter-spacing:.02em}
+.card{flex:1;min-width:0;padding:18px 16px;border-radius:20px;display:flex;flex-direction:column}
+.chapter-head{margin:-18px -16px 16px;padding:16px;border-radius:19px 19px 0 0}.chapter-head h1{font-size:1.65rem;line-height:1.15;margin-top:8px}.chapter-kicker{font-size:.72rem;letter-spacing:.055em}.chapter-kicker span{font-size:1.1rem;padding:6px}
+h1{font-size:1.9rem;line-height:1.15}.intro{font-size:1.05rem;line-height:1.5}.note{font-size:.85rem;line-height:1.45;margin-bottom:14px}
+#story{font-size:1.05rem;line-height:1.55;padding:15px 13px}#question{font-size:1.12rem;line-height:1.45;margin:16px 0}.progress{height:9px;margin-bottom:10px}#number{font-size:.78rem;margin:2px 0 10px}
+.choices{gap:12px}.choice{font-size:1rem;line-height:1.45;min-height:64px;padding:15px 12px;gap:10px}.choice:before{flex-basis:28px;line-height:28px;font-size:.8rem}
+.primary{font-size:1.05rem;min-height:62px;padding:16px 12px;line-height:1.4;margin-top:16px}.feedback{font-size:1rem;line-height:1.5}.feedback:not(:empty){padding:14px;margin:16px 0}
+.mission{display:flex;flex-direction:column;gap:14px;margin:8px 0 20px}.tile{grid-template-columns:36px minmax(0,1fr) 14px;min-height:108px;padding:18px 12px;gap:10px}.tile strong{font-size:1.05rem}.tile small{font-size:.85rem;line-height:1.4}.tile .ico{font-size:1.5rem}textarea{font-size:1rem;line-height:1.5;min-height:180px;padding:14px}.maze{max-width:300px}.program{font-size:.95rem}.footer{font-size:.75rem}
+@media(min-width:600px){.shell{padding-top:24px;padding-bottom:32px}.card{min-height:740px}}
+@media(max-width:359px){.shell{padding-inline:7px}.card{padding-inline:12px}.chapter-head{margin-inline:-12px;padding-inline:12px}.chapter-head h1{font-size:1.45rem}.tile{grid-template-columns:30px minmax(0,1fr) 12px;gap:7px;padding-inline:9px}.logo img{width:104px}.step{font-size:.65rem}.choice{padding-inline:10px}}
+
+/* User-locked portrait ratio: 20 high : 9 wide. Do not override by breakpoint. */
+html,body{height:100%;margin:0}
+body{display:grid;place-items:center;min-height:100svh}
+.shell{width:min(100vw,45svh,480px);height:auto;aspect-ratio:9 / 20;min-height:0;max-height:none;max-width:none;margin:0;padding:12px 10px;overflow:hidden;display:flex;flex-direction:column;border:1px solid #ffffff30;border-radius:22px;background:#080e1b55}
+.top{flex:0 0 auto;margin-bottom:10px}
+.card{flex:1 1 0;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--neon) #11182b}
+.card>*{flex-shrink:0}
+.footer{flex:0 0 auto;margin-top:8px;padding-top:0}
+
+.robot-preview{display:block;color:inherit;text-decoration:none;margin-bottom:18px}.robot-preview .maze{display:grid;width:min(100%,230px);margin:4px auto 12px;gap:5px}.robot-preview .cell{font-size:1.4rem}.robot-preview .primary{margin-top:8px}.robot-back{display:block;color:var(--ice);font-size:.85rem;margin:0 0 12px;text-underline-offset:4px}
+
+
+/* ===== ICT opleidingen pulldown ===== */
+.opleidingen-card{
+  padding:14px 12px !important;
+  overflow:hidden !important;
+}
+.opleidingen-card .chapter-head{
+  margin:-14px -12px 11px !important;
+  padding:12px !important;
+}
+.opleidingen-card .chapter-head h1{
+  font-size:1.30rem !important;
+  line-height:1.08 !important;
+  margin:5px 0 0 !important;
+}
+.selector-wrap{
+  margin:0 0 9px;
+}
+.selector-label{
+  display:block;
+  font-size:.66rem;
+  color:var(--ice);
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  margin:0 0 4px;
+}
+#opleidingSelect{
+  width:100%;
+  border:1px solid #ffffff70;
+  border-radius:11px;
+  padding:9px 36px 9px 10px;
+  color:#101c2c;
+  font-size:.76rem;
+  line-height:1.2;
+  font-weight:900;
+  background:
+    linear-gradient(110deg,var(--neon),var(--ice));
+  box-shadow:0 5px 18px var(--halo);
+  outline:none;
+}
+.edu-panel{
+  flex:1;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  border:1px solid #ffffff25;
+  border-radius:15px;
+  padding:10px;
+  background:linear-gradient(125deg,#293652,#1b2540);
+  box-shadow:inset 0 1px 0 #ffffff12,0 8px 22px #0003;
+}
+.edu-head{
+  display:grid;
+  grid-template-columns:44px 1fr;
+  gap:8px;
+  align-items:center;
+  margin-bottom:7px;
+}
+.edu-icon{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  font-size:1.35rem;
+  background:linear-gradient(135deg,var(--ice),var(--neon));
+  color:#101728;
+  box-shadow:0 0 18px var(--wash);
+}
+.edu-title{
+  font-size:1.02rem;
+  line-height:1.08;
+  margin:0 0 4px;
+  color:#fff;
+}
+.badges{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+}
+.badge{
+  display:inline-block;
+  padding:3px 6px;
+  border-radius:999px;
+  font-size:.56rem;
+  font-weight:900;
+  background:#ffffff12;
+  border:1px solid #ffffff25;
+  color:var(--ice);
+}
+.edu-summary{
+  font-size:.73rem;
+  line-height:1.32;
+  margin:0 0 7px;
+  color:#f1f5ff;
+}
+.mini-title{
+  margin:0 0 4px;
+  font-size:.66rem;
+  font-weight:900;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  color:var(--ice);
+}
+.edu-list{
+  margin:0 0 7px;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:4px;
+}
+.edu-list li{
+  position:relative;
+  padding:5px 6px 5px 23px;
+  border-radius:8px;
+  background:#ffffff09;
+  border:1px solid #ffffff12;
+  font-size:.66rem;
+  line-height:1.18;
+}
+.edu-list li:before{
+  content:"✓";
+  position:absolute;
+  left:7px;
+  top:5px;
+  color:var(--neon);
+  font-weight:900;
+}
+.fit{
+  margin-top:auto;
+  padding:7px 8px;
+  border-radius:10px;
+  background:linear-gradient(115deg,var(--wash),#ffffff08);
+  border-left:3px solid var(--neon);
+  font-size:.65rem;
+  line-height:1.2;
+}
+.fit strong{color:var(--ice)}
+.edu-link{
+  min-height:39px !important;
+  padding:8px 9px !important;
+  margin-top:7px !important;
+  font-size:.72rem !important;
+}
+.source-note{
+  text-align:center;
+  font-size:.54rem;
+  line-height:1.15;
+  color:#9fb0c9;
+  margin-top:5px;
+}
+
+
+/* Iets donkerdere vlakken voor de opleidingenpagina */
+.opleidingen-card{
+  background:
+    linear-gradient(140deg,#151d30f7,#10172af7 52%,#0f1425f7) padding-box,
+    linear-gradient(130deg,var(--neon),#ffffff25 42%,var(--flare)) border-box !important;
+}
+
+.edu-panel{
+  background:linear-gradient(125deg,#243149,#172137) !important;
+}
+
+.edu-list li{
+  background:#182337 !important;
+  border-color:#ffffff18 !important;
+}
+
+.fit{
+  background:linear-gradient(115deg,#24314a,#182235) !important;
+}
+
+#opleidingSelect{
+  background:linear-gradient(110deg,#d6e2ef,#bacbdd) !important;
+  color:#101c2c !important;
+}
+
+
+/* Gekleurd pulldownmenu */
+#opleidingSelect{
+  background:linear-gradient(110deg,#2a3a55,#1c2a43) !important;
+  color:#f5f7ff !important;
+  border:1px solid #55e7ff88 !important;
+  box-shadow:0 0 16px #00cfff33 !important;
+}
+
+#opleidingSelect option,
+#opleidingSelect optgroup{
+  background:#1c2a43 !important;
+  color:#f5f7ff !important;
+}
+
+
+/* Donkergroen pulldownmenu */
+#opleidingSelect{
+  background:linear-gradient(110deg,#234235,#172d24) !important;
+  color:#f5fff7 !important;
+  border:1px solid #7bd69b88 !important;
+  box-shadow:0 0 16px #57c78533 !important;
+}
+
+#opleidingSelect option,
+#opleidingSelect optgroup{
+  background:#172d24 !important;
+  color:#f5fff7 !important;
+}
+
+
+/* Startuitleg opleidingenpagina */
+.edu-intro{
+  flex:1;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:16px 13px;
+  border:1px solid #ffffff25;
+  border-radius:15px;
+  background:linear-gradient(125deg,#24372f,#172a23);
+  box-shadow:inset 0 1px 0 #ffffff12,0 8px 22px #0003;
+}
+.edu-intro .big{
+  font-size:2.4rem;
+  text-align:center;
+  margin-bottom:8px;
+}
+.edu-intro h2{
+  margin:0 0 7px;
+  text-align:center;
+  color:#eaffef;
+  font-size:1rem;
+}
+.edu-intro p{
+  margin:0 0 8px;
+  font-size:.72rem;
+  line-height:1.35;
+  color:#eef7f1;
+}
+.edu-intro .tip{
+  margin-top:3px;
+  padding:8px 9px;
+  border-radius:10px;
+  background:#ffffff0c;
+  border-left:3px solid #7bd69b;
+  font-size:.68rem;
+  line-height:1.28;
+}
+.logo-note{
+  margin-top:5px;
+  text-align:center;
+  font-size:.57rem;
+  color:#a9bdb1;
+}
+
+
+/* Alleen schermpassing; oorspronkelijke inhoud en opdrachten blijven behouden. */
+html,body{width:100%;height:100%;min-height:0;overflow:hidden}
+body{display:block}
+.shell{position:fixed;left:0;top:0;width:360px;max-width:none;height:auto;
+  min-height:780px;max-height:none;aspect-ratio:auto;margin:0;
+  overflow:visible!important;transform-origin:top left}
+.shell .card{flex:1 0 auto;min-height:0;overflow:visible!important}
+
+</style>
+</head>
+<body>
+<main class="shell">
+  <div class="top">
+    <a class="logo" href="https://www.ter-aa.nl/" target="_blank" rel="noopener">
+      <img src="ter-aa-logo.png" alt="Ter AA">
+    </a>
+    <div class="step">JOUW VERVOLG</div>
+  </div>
+
+  <section class="card opleidingen-card">
+    <div class="chapter-head">
+      <div class="chapter-kicker"><span>🎓</span>ICT bij Ter AA</div>
+      <h1>Welke opleiding past bij jou?</h1>
+    </div>
+
+    <div class="selector-wrap">
+      <label class="selector-label" for="opleidingSelect">Kies een opleiding</label>
+      <select id="opleidingSelect">
+        <option value="" selected disabled>-- Kies hier een ICT-opleiding --</option>
+        
+<optgroup label="ICT Support">
+  <option value="assistent">Assistent dienstverlening — niveau 1</option>
+  <option value="medewerker">Medewerker ICT — niveau 2</option>
+  <option value="support">ICT support technician — niveau 3</option>
+</optgroup>
+<optgroup label="ICT support & systems">
+  <option value="cloud">Cloud specialist — niveau 4</option>
+  <option value="cyber">Cyber security specialist — niveau 4</option>
+  <option value="system">ICT system engineer — niveau 4</option>
+  <option value="network">Network specialist — niveau 4</option>
+</optgroup>
+<optgroup label="Software development">
+  <option value="fullstack">Full stack developer — niveau 4</option>
+  <option value="fullstack_t">Full stack developer (tweetalig) — niveau 4</option>
+  <option value="game">Game developer — niveau 4</option>
+  <option value="game_t">Game developer (tweetalig) — niveau 4</option>
+  <option value="software">Software engineer — niveau 4</option>
+  <option value="software_t">Software engineer (tweetalig) — niveau 4</option>
+</optgroup>
+
+      </select>
+    </div>
+
+    <div class="edu-intro" id="eduIntro">
+      <div class="big">🎓</div>
+      <h2>Kies bovenin een ICT-opleiding</h2>
+      <p>
+        Kies in het pulldownmenu de opleiding waar je meer over wilt weten.
+        Op deze plek verschijnt daarna een korte samenvatting van de opleiding.
+      </p>
+      <p>
+        Je ziet in het kort het niveau, de opleidingsduur, wat je vooral leert
+        en voor wie de opleiding interessant kan zijn.
+      </p>
+      <div class="tip">
+        Wil je daarna meer weten? Gebruik dan de knop bij de opleiding om direct
+        naar de officiële opleidingspagina van ter AA te gaan.
+      </div>
+      <div class="logo-note">Het ter AA-logo linksboven opent de website van ter AA.</div>
+    </div>
+
+    <div class="edu-panel" id="eduPanel" hidden>
+      <div class="edu-head">
+        <div class="edu-icon" id="eduIcon">🤝</div>
+        <div>
+          <h2 class="edu-title" id="eduTitle"></h2>
+          <div class="badges">
+            <span class="badge" id="eduLevel"></span>
+            <span class="badge" id="eduDuur"></span>
+            <span class="badge" id="eduGroup"></span>
+          </div>
+        </div>
+      </div>
+
+      <p class="edu-summary" id="eduSummary"></p>
+
+      <div class="mini-title">Dit leer je vooral</div>
+      <ul class="edu-list" id="eduList"></ul>
+
+      <div class="fit"><strong>Past bij jou als:</strong> <span id="eduFit"></span></div>
+
+      <a class="primary edu-link" id="eduLink" href="#" target="_blank" rel="noopener">
+        Bekijk deze opleiding op ter-aa.nl →
+      </a>
+    </div>
+
+    <div class="source-note">Samenvatting gebaseerd op de actuele ICT-opleidingen van Ter AA.</div>
+  </section>
+
+  <div class="footer">ICT College · Ter AA</div>
+</main>
+
+<script>
+const opleidingen = {"assistent": {"title": "Assistent dienstverlening", "level": "Niveau 1 · BOL/BBL", "duur": "1 jaar", "group": "ICT Support", "icon": "🤝", "summary": "Een brede entreeopleiding waarin je leert anderen praktisch te ondersteunen. De opleiding is niet uitsluitend ICT: dienstverlening en helpen van mensen staan centraal.", "learn": ["praktisch ondersteunen en samenwerken", "klantgericht en netjes werken", "ervaring opdoen in verschillende dienstverlenende situaties"], "fit": "Je wilt op niveau 1 starten en leren door veel praktisch te doen.", "url": "https://www.ter-aa.nl/opleiding/assistent-dienstverlening"}, "medewerker": {"title": "Medewerker ICT", "level": "Niveau 2 · BOL", "duur": "2 jaar", "group": "ICT Support", "icon": "🖥️", "summary": "Je maakt computers en andere devices gebruiksklaar, installeert hardware en software en helpt gebruikers bij ICT-problemen.", "learn": ["hardware en software installeren", "basis netwerken, kabels en printers", "meldingen registreren en storingen oplossen"], "fit": "Je werkt graag met computers én helpt graag mensen als iets niet werkt.", "url": "https://www.ter-aa.nl/opleiding/medewerker-ict"}, "support": {"title": "ICT support technician", "level": "Niveau 3 · BOL", "duur": "2 jaar", "group": "ICT Support", "icon": "🛠️", "summary": "Je ondersteunt gebruikers via de servicedesk en beheert apparaten, software en onderdelen van het netwerk.", "learn": ["gebruikers ondersteunen en adviseren", "hard- en software installeren en onderhouden", "netwerken, accounts, back-ups en beveiliging beheren"], "fit": "Je vindt storingen oplossen leuk en kunt rustig uitleg geven aan gebruikers.", "url": "https://www.ter-aa.nl/opleiding/ict-support-technician"}, "cloud": {"title": "Cloud specialist", "level": "Niveau 4 · BOL", "duur": "3 jaar", "group": "ICT support & systems", "icon": "☁️", "summary": "Je richt cloudomgevingen in, beheert ze en zorgt dat systemen en data veilig en beschikbaar blijven.", "learn": ["werken met Azure, AWS en Google Cloud", "cloudsystemen beheren en beveiligen", "monitoring, automatisering en migraties naar de cloud"], "fit": "Je wilt systemen beheren, maar vooral werken met moderne cloudtechnologie.", "url": "https://www.ter-aa.nl/opleiding/cloud-specialist"}, "cyber": {"title": "Cyber security specialist", "level": "Niveau 4 · BOL", "duur": "3 jaar", "group": "ICT support & systems", "icon": "🛡️", "summary": "Je leert netwerken, systemen en data beschermen tegen digitale aanvallen en onderzoekt hoe beveiliging kan worden verbeterd.", "learn": ["cybersecurity en ethical hacking", "pentesten, Fortinet en netwerkbeveiliging", "dreigingen herkennen, monitoren en maatregelen nemen"], "fit": "Je bent nieuwsgierig naar hackers, beveiliging en het opsporen van zwakke plekken.", "url": "https://www.ter-aa.nl/opleiding/cyber-security-specialist"}, "system": {"title": "ICT system engineer", "level": "Niveau 4 · BOL", "duur": "3 jaar", "group": "ICT support & systems", "icon": "🧰", "summary": "Een brede beheeropleiding. Je zorgt dat computernetwerken, informatiesystemen en cloudomgevingen goed werken en veilig blijven.", "learn": ["systemen, netwerken en cloud beheren", "data en systemen beveiligen", "monitoring, automatisering en gebruikers adviseren"], "fit": "Je wilt breed inzetbaar zijn als beheerder en nog niet direct één specialisatie kiezen.", "url": "https://www.ter-aa.nl/opleiding/ict-system-engineer"}, "network": {"title": "Network specialist", "level": "Niveau 4 · BOL", "duur": "3 jaar", "group": "ICT support & systems", "icon": "🌐", "summary": "Je ontwerpt, beheert en beveiligt netwerken zodat apparaten, locaties en cloudomgevingen snel en betrouwbaar verbonden blijven.", "learn": ["routers, switches en firewalls configureren", "Cisco-netwerken beheren en monitoren", "lokale en cloudnetwerken beveiligen"], "fit": "Je wilt weten hoe alles met elkaar verbonden is en graag met netwerkapparatuur werken.", "url": "https://www.ter-aa.nl/opleiding/network-specialist"}, "fullstack": {"title": "Full stack developer", "level": "Niveau 4 · BOL", "duur": "3 jaar", "group": "Software development", "icon": "🌍", "summary": "Je bouwt complete websites en webapplicaties: zowel wat de gebruiker ziet als de techniek en databases achter de schermen.", "learn": ["frontend en backend webdevelopment", "databases, frameworks en testen", "webdesign en mobile application design"], "fit": "Je wilt websites en apps bouwen en vindt zowel techniek als vormgeving interessant.", "url": "https://www.ter-aa.nl/opleiding/full-stack-developer"}, "fullstack_t": {"title": "Full stack developer (tweetalig)", "level": "Niveau 4 · BOL", "duur": "3 jaar", "group": "Software development", "icon": "🌍🇬🇧", "summary": "Dezelfde inhoud als Full stack developer, maar ruim de helft van de lessen, het lesmateriaal en de toetsing is in het Engels.", "learn": ["frontend, backend en databases", "frameworks en webapplicaties", "internationale samenwerking en mogelijk stage/uitwisseling"], "fit": "Je wilt webdeveloper worden én je voorbereiden op een internationale studie- of werkomgeving.", "url": "https://www.ter-aa.nl/opleiding/full-stack-developer-tweetalig"}, "game": {"title": "Game developer", "level": "Niveau 4 · BOL", "duur": "3 jaar", "group": "Software development", "icon": "🎮", "summary": "Je krijgt een brede basis in softwareontwikkeling en specialiseert je in het bouwen en testen van games.", "learn": ["game engines en game programming", "2D/3D, animatie, physics en collision detection", "storyboards, controllers en games testen"], "fit": "Je houdt van programmeren én wilt creatieve, interactieve werelden en games maken.", "url": "https://www.ter-aa.nl/opleiding/game-developer"}, "game_t": {"title": "Game developer (tweetalig)", "level": "Niveau 4 · BOL", "duur": "3 jaar", "group": "Software development", "icon": "🎮🇬🇧", "summary": "Dezelfde opleiding als Game developer, maar ruim de helft van de lessen en de toetsing is in het Engels, met extra internationale oriëntatie.", "learn": ["game programming en game engines", "2D/3D, animatie en game-logica", "internationale samenwerking en mogelijk buitenlandse stage"], "fit": "Je wilt games ontwikkelen en vindt werken en leren in het Engels aantrekkelijk.", "url": "https://www.ter-aa.nl/opleiding/game-developer-tweetalig"}, "software": {"title": "Software engineer", "level": "Niveau 4 · BOL", "duur": "3 jaar", "group": "Software development", "icon": "💻", "summary": "Je ontwerpt, programmeert en test software voor computers, apparaten en systemen. De opleiding is breed en technisch.", "learn": ["desktop, embedded en webdevelopment", "programmeren, databases en testen", "software maken die apparaten en systemen aanstuurt"], "fit": "Je wilt breed leren programmeren en graag technische problemen oplossen met software.", "url": "https://www.ter-aa.nl/opleiding/software-engineer"}, "software_t": {"title": "Software engineer (tweetalig)", "level": "Niveau 4 · BOL", "duur": "3 jaar", "group": "Software development", "icon": "💻🇬🇧", "summary": "Dezelfde brede softwareopleiding als Software engineer, met ruim de helft van het onderwijs, materiaal en toetsing in het Engels.", "learn": ["applicaties ontwerpen en programmeren", "embedded systems, webdevelopment en databases", "internationale samenwerking en mogelijk buitenlandse stage"], "fit": "Je wilt software engineer worden en later ook in een internationale omgeving kunnen werken.", "url": "https://www.ter-aa.nl/opleiding/software-engineer-tweetalig"}};
+const select = document.getElementById("opleidingSelect");
+
+function renderOpleiding(key){
+  const o = opleidingen[key];
+  document.getElementById("eduIcon").textContent = o.icon;
+  document.getElementById("eduTitle").textContent = o.title;
+  document.getElementById("eduLevel").textContent = o.level;
+  document.getElementById("eduDuur").textContent = o.duur;
+  document.getElementById("eduGroup").textContent = o.group;
+  document.getElementById("eduSummary").textContent = o.summary;
+  document.getElementById("eduFit").textContent = o.fit;
+  document.getElementById("eduLink").href = o.url;
+
+  const list = document.getElementById("eduList");
+  list.innerHTML = "";
+  o.learn.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    list.appendChild(li);
+  });
+}
+
+select.addEventListener("change", () => {
+  document.getElementById("eduIntro").hidden = true;
+  document.getElementById("eduPanel").hidden = false;
+  renderOpleiding(select.value);
+});
+</script>
+<script>
+(() => {
+  const page = document.querySelector('.shell');
+  let frame;
+  function fitPage() {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => {
+      const view = window.visualViewport;
+      const width = view ? view.width : document.documentElement.clientWidth;
+      const height = view ? view.height : document.documentElement.clientHeight;
+      const inset = 8;
+      const naturalWidth = page.offsetWidth;
+      const naturalHeight = Math.max(page.offsetHeight, page.scrollHeight);
+      const scale = Math.min((width - inset * 2) / naturalWidth,
+                             (height - inset * 2) / naturalHeight, 1.35);
+      page.style.transform = `scale(${Math.max(0.1, scale)})`;
+      page.style.left = `${(view ? view.offsetLeft : 0) + (width - naturalWidth * scale) / 2}px`;
+      page.style.top = `${(view ? view.offsetTop : 0) + (height - naturalHeight * scale) / 2}px`;
+    });
+  }
+  window.addEventListener('resize', fitPage);
+  window.addEventListener('pageshow', fitPage);
+  window.addEventListener('load', fitPage);
+  if (window.visualViewport) {
+    visualViewport.addEventListener('resize', fitPage);
+    visualViewport.addEventListener('scroll', fitPage);
+  }
+  new ResizeObserver(fitPage).observe(page);
+  // Meet opnieuw zodra feedback, opdrachten of opleidingsinformatie veranderen.
+  new MutationObserver(fitPage).observe(page.querySelector('.card'), {
+    childList: true, subtree: true, characterData: true, attributes: true
+  });
+  if (document.fonts) document.fonts.ready.then(fitPage);
+  fitPage();
+})();
+</script>
+</body>
+</html>
