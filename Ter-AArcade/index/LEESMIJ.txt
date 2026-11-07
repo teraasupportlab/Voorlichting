@@ -1,0 +1,10 @@
+TER AARCADE
+
+Pak het volledige zipbestand uit. Open daarna index.html in Chrome, Edge of Firefox.
+Alle zes spellen werken zonder installatie.
+
+Eigen website: upload index.html, maze.html en play.html naar dezelfde map.
+Besturing staat bij elk spel. Records worden in je browser bewaard.
+
+Geluid: zet het geluid voor alle spellen aan of uit op het hoofdmenu.
+Upload ook audio.js samen met de HTML-bestanden.
