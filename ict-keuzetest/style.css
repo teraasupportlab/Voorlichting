@@ -1,0 +1,490 @@
+/*
+  TER AA ICT-KEUZEHULP
+  Dit bestand bepaalt alle kleuren, afmetingen en animaties.
+  De pagina's blijven altijd in de staande telefoonverhouding 9:20.
+*/
+
+/* 1. KLEUREN: verander deze waarden als je de huisstijl wilt aanpassen. */
+:root {
+  --tekst: #f7fbff;
+  --tekst-zacht: #b8c8dc;
+  --achtergrond-donker: #08182d;
+  --kaart-boven: #15375df2;
+  --kaart-onder: #0c1e39f0;
+  --oranje: #ff8a00;
+  --geel: #ffd24d;
+  --cyaan: #55e7ff;
+  --groen: #52e3a7;
+  --roze: #ff6f91;
+  --paars: #9d6cff;
+}
+
+/* 2. BASIS: voorkomt onverwachte witruimtes en buiten beeld scrollen. */
+* { box-sizing: border-box; }
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  color: var(--tekst);
+}
+
+body {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 5%, #173b68 0, transparent 28%),
+    radial-gradient(circle at 90% 92%, #6a2a73 0, transparent 30%),
+    linear-gradient(155deg, var(--achtergrond-donker), #0c2440 56%, #111632);
+}
+
+/*
+  3. TELEFOONSCHERM
+  9 : 20 = 45% zo breed als het scherm hoog is.
+  De min()-regels zorgen dat het scherm nooit buiten het venster valt.
+*/
+.shell {
+  width: min(100vw, 45svh);
+  height: min(100svh, 222.222vw);
+  min-height: 0;
+  aspect-ratio: 9 / 20;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.7vh, 18px);
+  padding: clamp(12px, 2.4vh, 24px);
+  overflow: hidden;
+}
+
+/* 4. BOVENBALK, LOGO EN VOETTEKST. */
+.top {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo { display: block; text-decoration: none; }
+
+.logo img {
+  display: block;
+  width: 104px;
+  max-height: 44px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.badge {
+  padding: 7px 10px;
+  border: 1px solid #ffffff38;
+  border-radius: 999px;
+  color: var(--tekst-zacht);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.back {
+  color: var(--tekst-zacht);
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.back:hover { color: #fff; }
+
+.footer {
+  flex: 0 0 auto;
+  color: #b7cae155;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+
+/* 5. HET GROTE TEKSTSCHERM (de donkere kaart). */
+.card {
+  position: relative;
+  isolation: isolate;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: clamp(18px, 3.2vh, 30px);
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  border-radius: 24px;
+}
+
+/*
+  6. RUSTIG DRAAIENDE KLEURENRAND
+  Dit is één doorlopende, dunne rand: geen los lichtstreepje.
+  De kleurverdeling van de rand draait als geheel rond de kaart.
+  De ::after-laag legt het donkere binnenvlak eroverheen.
+*/
+@property --rand-hoek {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: -1px;
+  border-radius: 25px;
+  background: conic-gradient(
+    from var(--rand-hoek),
+    var(--cyaan),
+    var(--paars),
+    var(--roze),
+    var(--oranje),
+    var(--geel),
+    var(--groen),
+    var(--cyaan)
+  );
+  animation: draai-kleurenrand 7s linear infinite;
+  filter: drop-shadow(0 0 2px var(--cyaan)) drop-shadow(0 0 3px var(--roze));
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 1px;
+  border-radius: 23px;
+  background: linear-gradient(150deg, var(--kaart-boven), var(--kaart-onder));
+}
+
+.card > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes draai-kleurenrand {
+  to {
+    --rand-hoek: 360deg;
+  }
+}
+
+/* 7. TEKSTEN EN TITELS. */
+.eyebrow {
+  margin-bottom: 9px;
+  color: var(--geel);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0 0 13px;
+  font-size: clamp(2.05rem, 7vw, 3.4rem);
+  line-height: 0.96;
+  letter-spacing: -0.055em;
+}
+
+h1 em {
+  color: var(--oranje);
+  font-style: normal;
+}
+
+h2 {
+  margin: 0 0 7px;
+  font-size: 1.25rem;
+}
+
+p {
+  margin: 0;
+  color: var(--tekst-zacht);
+  line-height: 1.45;
+}
+
+.intro { font-size: 1.03rem; }
+
+/* 8. GROTE KEUZEKNOPPEN OP DE STARTPAGINA EN VOOROPLEIDINGSPAGINA. */
+.choices,
+.route-list {
+  display: grid;
+  gap: 11px;
+  margin-top: clamp(17px, 2.8vh, 28px);
+}
+
+a.choice,
+button.choice {
+  display: grid;
+  grid-template-columns: 39px 1fr 22px;
+  gap: 11px;
+  align-items: center;
+  width: 100%;
+  padding: 15px 16px;
+  border: 1px solid #ffffff33;
+  border-radius: 17px;
+  color: var(--tekst);
+  background: linear-gradient(110deg, #ffffff10, #ffffff05);
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.16s, border-color 0.16s, background 0.16s;
+}
+
+.choice:hover,
+.choice:focus-visible {
+  border-color: var(--cyaan);
+  outline: none;
+  background: #ffffff14;
+  transform: translateY(-2px);
+}
+
+.choice .icon {
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+.choice strong {
+  display: block;
+  font-size: 1.02rem;
+}
+
+.choice small {
+  display: block;
+  margin-top: 3px;
+  color: var(--tekst-zacht);
+  font-size: 0.79rem;
+  line-height: 1.3;
+}
+
+.choice .arrow {
+  color: var(--geel);
+  font-size: 1.6rem;
+}
+
+/* 9. PULLDOWNMENU OP DE OPLEIDINGENPAGINA. */
+.select-wrap {
+  position: relative;
+  margin-top: 16px;
+}
+
+.select-wrap::after {
+  content: "⌄";
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: var(--geel);
+  font-size: 1.4rem;
+  pointer-events: none;
+}
+
+select {
+  width: 100%;
+  padding: 13px 42px 13px 14px;
+  border: 1px solid #86c5ad;
+  border-radius: 14px;
+  color: var(--tekst);
+  background: #092a24;
+  color-scheme: dark;
+  font: 800 1rem Inter, Arial, sans-serif;
+  appearance: none;
+}
+
+option {
+  color: var(--tekst);
+  background: #092a24;
+}
+
+.study {
+  margin-top: 15px;
+  padding: 16px;
+  border-left: 4px solid var(--oranje);
+  border-radius: 0 15px 15px 0;
+  background: #081a30a8;
+}
+
+.study .level,
+.result .level {
+  color: var(--geel);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.study h2 { margin: 5px 0 8px; }
+
+.study a,
+.external {
+  display: inline-block;
+  margin-top: 13px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: #08243c;
+  background: var(--geel);
+  font-size: 0.84rem;
+  font-weight: 950;
+  text-decoration: none;
+}
+
+.study a:hover,
+.external:hover { background: #fff; }
+
+/* 10. KEUZETEST: voortgang, antwoorden en de top 2. */
+.progressline {
+  height: 8px;
+  margin: 15px 0 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #ffffff1c;
+}
+
+.progressline span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--oranje), var(--geel));
+  transition: width 0.25s;
+}
+
+.counter {
+  color: var(--tekst-zacht);
+  font-size: 0.77rem;
+  font-weight: 850;
+  text-align: right;
+}
+
+.question {
+  margin: 10px 0 4px;
+  font-size: clamp(1.28rem, 5.4vw, 1.75rem);
+  font-weight: 950;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+}
+
+.hint { font-size: 0.84rem; }
+
+.test-options {
+  display: grid;
+  gap: 9px;
+  margin-top: 15px;
+}
+
+.test-options button {
+  padding: 12px 13px;
+  border: 1px solid #ffffff24;
+  border-radius: 14px;
+  color: #fff;
+  background: #ffffff0d;
+  font: 800 0.89rem/1.3 Inter, Arial, sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+
+.test-options button:hover,
+.test-options button:focus-visible {
+  border-color: var(--cyaan);
+  outline: none;
+  background: #ffffff19;
+}
+
+.result-intro { font-size: 0.95rem; }
+
+.results {
+  display: grid;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.result {
+  position: relative;
+  padding: 13px;
+  border: 1px solid #ffffff2c;
+  border-radius: 15px;
+  background: #07182dcc;
+}
+
+.rank {
+  position: absolute;
+  top: 11px;
+  right: 13px;
+  color: var(--geel);
+  font-size: 0.78rem;
+  font-weight: 950;
+}
+
+.result h2 {
+  padding-right: 68px;
+  font-size: 1.05rem;
+}
+
+.result .level { color: var(--cyaan); }
+
+.result p {
+  margin-top: 6px;
+  font-size: 0.82rem;
+}
+
+.result a {
+  display: inline-block;
+  margin-top: 9px;
+  color: var(--geel);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.result a:hover { text-decoration: underline; }
+
+.notice {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid #ffcf6a8c;
+  border-radius: 15px;
+  color: #fff;
+  background: #ffad1d18;
+}
+
+.notice strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--geel);
+}
+
+.secondary {
+  display: block;
+  margin-top: 13px;
+  padding: 12px;
+  border: 1px solid #ffffff36;
+  border-radius: 13px;
+  color: #fff;
+  font-weight: 900;
+  text-align: center;
+  text-decoration: none;
+}
+
+.secondary:hover { background: #ffffff12; }
+
+/* 11. COMPACTE VERSIE VOOR LAGERE TELEFOONSCHERMEN. */
+@media (max-height: 700px) {
+  .shell { gap: 10px; padding: 11px; }
+  .card { padding: 17px; }
+  .choices,
+  .route-list { gap: 8px; margin-top: 14px; }
+  a.choice,
+  button.choice { padding: 11px 12px; }
+  .choice .icon { font-size: 1.4rem; }
+  .choice strong { font-size: 0.92rem; }
+  .choice small { font-size: 0.71rem; }
+  h1 { font-size: clamp(1.85rem, 7vw, 2.6rem); }
+  .test-options { gap: 7px; margin-top: 11px; }
+  .test-options button { padding: 10px 11px; font-size: 0.81rem; }
+  .question { font-size: 1.22rem; }
+  .results { gap: 7px; margin-top: 10px; }
+  .result { padding: 10px; }
+  .result p { font-size: 0.75rem; }
+  .footer { font-size: 0.61rem; }
+}

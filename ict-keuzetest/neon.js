@@ -1,0 +1,1 @@
+/* De kleurrand wordt volledig via style.css geanimeerd. */
