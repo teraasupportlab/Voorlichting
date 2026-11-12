@@ -295,6 +295,35 @@ input[type=range]{width:100%;accent-color:var(--oranje)}
 .tijdlijn div:nth-child(3){border-color:var(--oranje)} .tijdlijn div:nth-child(3) b{color:var(--oranje)}
 .tijdlijn div:nth-child(4){border-color:var(--lime)} .tijdlijn div:nth-child(4) b{color:var(--lime)}
 
+/* lage schermen (digibord): compacter, zodat 'Verder' zonder scrollen zichtbaar is */
+@media (max-height:820px){
+.app{padding:6px 16px 10px}
+.top{padding:2px 0 6px}
+h1,h2,h3{margin:.1em 0 .25em}
+.kaart{padding:14px 16px}
+.noor{margin:2px 0 8px}
+.noor img{width:46px;height:46px}
+.noor .bel{padding:9px 13px}
+.route{gap:6px;margin-top:4px}
+.stop{padding:8px 14px}
+.stop .nr{width:38px;height:38px;font-size:1.1rem}
+.stop.mijl{padding:4px 14px}
+.stop.mijl .nr{width:28px;height:28px}
+.vraag{margin:4px 0 8px}
+.optie{padding:10px 14px}
+.opties{gap:8px}
+.fb{margin-top:8px;padding:10px 14px}
+.verder{margin-top:8px}
+.echt{margin:10px 0;padding:12px}
+.exbanner{margin:10px 0 2px}
+.kd{margin:8px 0}
+}
+/* diploma in twee kolommen op brede schermen */
+@media (min-width:900px){
+.dip-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.dip-r .tijdlijn{grid-template-columns:repeat(2,1fr)}
+.dip-r .type{margin-top:0}
+}
 /* fullscreen-knop */
 .fs-knop{position:fixed;right:14px;bottom:14px;z-index:60;padding:10px 16px;border-radius:999px;border:1px solid var(--cyan);background:rgba(3,16,32,.85);color:var(--wit);font:inherit;font-weight:700;font-size:1rem;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.4)}
 .fs-knop[hidden]{display:none}
@@ -1159,7 +1188,7 @@ const TYPES={
 function topType(){ const p=S.profiel; const k=Object.keys(p).reduce((a,b)=>p[b]>p[a]?b:a,'helper'); return TYPES[k]; }
 function diplomaScherm(){
   const ty=topType(); const tot=Object.values(S.sterren).reduce((a,b)=>a+b,0);
-  const el=scherm(`
+  const el=scherm(`<div class="dip-grid"><div class="dip-l">
     <div class="diploma">
       <img class="logo" src="${IMG.logo}" alt="ter AA">
       <div class="label">Diploma (nou ja, bijna 😉)</div>
@@ -1176,7 +1205,7 @@ function diplomaScherm(){
       <div class="em"><span class="zacht">🔧 Vakkundig</span><b class="acc2">${pct('vak')}%</b></div>
       <div class="em"><span class="zacht">😊 Klant blij</span><b class="acc">${pct('klant')}%</b></div>
       <div class="em"><span class="zacht">📋 Netjes & veilig</span><b style="color:var(--lime)">${pct('netjes')}%</b></div>
-    </div>
+    </div></div><div class="dip-r">
     ${S.geenMatch?`<div class="echt"><div class="em">🤔</div><div><b class="acc2">Aan het begin zei je overal "Nee joh"…</b><br>…en toch heb je nu ${tot} sterren gehaald! Twijfel je nog? Praat even met een student of docent aan tafel, of kijk welke andere opleidingen Ter AA heeft.</div></div>`:''}
     <div class="kaart type"><div class="em">${ty.em}</div><div><div class="label">Jouw ICT-type</div><h3 style="margin:.15em 0">${ty.naam}</h3><p>${ty.tekst}</p><p class="zacht">${ty.werk}</p></div></div>
     <div class="label" style="margin-top:20px">Zo ziet jouw route eruit</div>
@@ -1188,7 +1217,7 @@ function diplomaScherm(){
     </div>
     ${noor(`Wat vond je ervan, <b>${esc(S.naam)}</b>? Wil je het écht doen? Kijk aan tafel: daar kun je een kabel krimpen of een pc in elkaar zetten. Onze studenten helpen je graag!`)}
     <div class="rij" style="margin-top:8px"><a class="knop" href="${AANMELD_URL}" target="_blank" rel="noopener">Meer info & aanmelden ▸</a><span class="ruimte"></span><button class="knop cyaan" id="opnieuw">↺ Nieuwe speler</button></div>
-  `,'Diploma');
+  </div></div>`,'Diploma');
   snd.win(); confetti(110);
   el.querySelector('#opnieuw').onclick=startScherm;
 }
@@ -1207,6 +1236,31 @@ setInterval(()=>{
     overlay.querySelector('.knop').onclick=()=>{clearInterval(t);overlay.remove();overlay=null;laatste=Date.now();};
   }
 },2000);
+
+/* ================= PAS IN SCHERM ================= */
+// Is een scherm hoger dan het beeld, dan schalen we de app iets kleiner (zoom),
+// zodat de knop 'Verder' altijd zichtbaar is zonder scrollen.
+const ZOOM_MIN = 0.62;
+let fitScherm=null, fitZoom=1, fitRaf=0;
+function pasIn(){
+  fitRaf=0;
+  const sch=app.querySelector('.scherm'); if(!sch) return;
+  const sleutel=(sch.firstElementChild&&sch.firstElementChild.firstElementChild)||sch.firstElementChild||sch; // nieuwe vraag = nieuwe inhoud
+  const nieuw = sleutel!==fitScherm; fitScherm=sleutel;
+  const oud={z:app.style.zoom, mh:app.style.minHeight, f:sch.style.flex};
+  app.style.zoom=''; app.style.minHeight='0'; sch.style.flex='none';
+  const nat=app.offsetHeight;
+  app.style.minHeight=oud.mh; sch.style.flex=oud.f;
+  let z=Math.max(ZOOM_MIN, Math.min(1, (innerHeight-8)/nat));
+  if(!nieuw) z=Math.min(z, fitZoom);       // binnen één scherm niet heen en weer springen
+  fitZoom=z;
+  app.style.zoom = z<1 ? String(z) : '';
+  app.style.minHeight = z<1 ? (innerHeight/z)+'px' : '';
+}
+function pasInLater(){ if(!fitRaf) fitRaf=requestAnimationFrame(pasIn); }
+new MutationObserver(pasInLater).observe(app,{childList:true,subtree:true});
+addEventListener('resize',()=>{ fitScherm=null; pasInLater(); });
+document.addEventListener('fullscreenchange',()=>{ fitScherm=null; pasInLater(); });
 
 /* ================= FULLSCREEN (digibord) ================= */
 const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
