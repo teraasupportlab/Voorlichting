@@ -295,6 +295,9 @@ input[type=range]{width:100%;accent-color:var(--oranje)}
 .tijdlijn div:nth-child(3){border-color:var(--oranje)} .tijdlijn div:nth-child(3) b{color:var(--oranje)}
 .tijdlijn div:nth-child(4){border-color:var(--lime)} .tijdlijn div:nth-child(4) b{color:var(--lime)}
 
+/* fullscreen-knop */
+.fs-knop{position:fixed;right:14px;bottom:14px;z-index:60;padding:10px 16px;border-radius:999px;border:1px solid var(--cyan);background:rgba(3,16,32,.85);color:var(--wit);font:inherit;font-weight:700;font-size:1rem;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.4)}
+.fs-knop[hidden]{display:none}
 /* idle */
 .overlay{position:fixed;inset:0;background:rgba(3,16,32,.88);display:grid;place-items:center;z-index:50;padding:20px;animation:in .3s}
 .overlay .kaart{max-width:420px;text-align:center;background:var(--navy2)}
@@ -1204,6 +1207,18 @@ setInterval(()=>{
     overlay.querySelector('.knop').onclick=()=>{clearInterval(t);overlay.remove();overlay=null;laatste=Date.now();};
   }
 },2000);
+
+/* ================= FULLSCREEN (digibord) ================= */
+const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
+const fsKan=!!(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen);
+function fsAan(){ const d=document.documentElement; try{ const r=(d.requestFullscreen||d.webkitRequestFullscreen).call(d); if(r&&r.catch) r.catch(()=>{}); }catch(e){} }
+const fsKnop=document.createElement('button'); fsKnop.className='fs-knop'; fsKnop.type='button'; fsKnop.textContent='⛶ Volledig scherm';
+fsKnop.onclick=e=>{ e.stopPropagation(); fsAan(); };
+document.body.appendChild(fsKnop);
+function fsUpdate(){ fsKnop.hidden=!fsKan||!!fsEl(); }
+document.addEventListener('fullscreenchange',fsUpdate); document.addEventListener('webkitfullscreenchange',fsUpdate); fsUpdate();
+// kiosk: elke tik buiten fullscreen zet hem weer aan
+document.addEventListener('pointerdown',()=>{ if(fsKan&&!fsEl()) fsAan(); });
 
 startScherm();
 </script>
